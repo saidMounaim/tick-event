@@ -3,6 +3,7 @@ import { Noto_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/shared/layout/header";
 import { Footer } from "@/components/shared/layout/footer";
+import { Toaster } from "sonner";
 
 const notoSans = Noto_Sans({
   variable: "--font-noto-sans",
@@ -28,6 +29,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
         </div>
+        <Toaster richColors />
       </body>
     </html>
   );
