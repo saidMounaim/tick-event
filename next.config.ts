@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "100mb",
     },
   },
+  images: {
+    domains: ["ik.imagekit.io"],
+  },
 };
 
 export default nextConfig;

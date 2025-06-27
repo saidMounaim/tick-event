@@ -64,3 +64,17 @@ export async function createEventAction(
     return { success: false, message: "Failed to create event." };
   }
 }
+
+export async function getLatestEventsAction(size: number = 5) {
+  try {
+    const events = await prisma.event.findMany({
+      orderBy: { date: "desc" },
+      take: size,
+    });
+
+    return events;
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Failed to fetch events." };
+  }
+}
