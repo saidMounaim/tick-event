@@ -5,6 +5,7 @@ import { createEventSchema } from "@/lib/validations";
 import { prisma } from "../prisma";
 import { auth } from "../auth";
 import { headers } from "next/headers";
+import { revalidatePath } from "next/cache";
 
 export async function getEventsAction(query?: string) {
   const where = query
@@ -102,4 +103,37 @@ export async function getEventByIdAction(id: string) {
   });
 
   return event;
+}
+
+export async function getUserEventsAction(userId: string) {
+  const events = await prisma.event.findMany({
+    where: { userId },
+    orderBy: { date: "desc" },
+    include: {
+      additionalImages: true,
+    },
+  });
+
+  return events;
+}
+
+export async function deleteEventAction(eventId: string, pathname: string) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user?.id) {
+    return { success: false, message: "User not authenticated." };
+  }
+
+  try {
+    await prisma.event.delete({
+      where: { id: eventId },
+    });
+    revalidatePath(pathname);
+    return { success: true, message: "Event deleted successfully!" };
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Failed to delete event." };
+  }
 }
