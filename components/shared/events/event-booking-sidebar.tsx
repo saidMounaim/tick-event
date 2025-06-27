@@ -3,15 +3,66 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export function EventBookingSidebar({
   price,
   tickets,
+  eventId,
+  userId,
+  eventTitle,
+  eventDate,
 }: {
   price: number;
   tickets: number;
+  eventId: string;
+  userId: string;
+  eventTitle: string;
+  eventDate: Date;
 }) {
   const [ticketQuantity, setTicketQuantity] = useState(1);
+  const hasEventFinished = new Date(eventDate) < new Date();
+
+  const handleCheckout = async () => {
+    try {
+      if (hasEventFinished) {
+        toast.error(
+          "You cannot purchase tickets for an event that has already finished."
+        );
+        return;
+      }
+      if (userId === "") {
+        toast.error("You must be logged in to purchase tickets.");
+        return;
+      }
+
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId,
+          eventId,
+          quantity: ticketQuantity,
+          price,
+          eventTitle,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.url) {
+        window.open(data.url, "_blank");
+      } else {
+        toast.error("Stripe checkout session creation failed.");
+      }
+    } catch (err) {
+      toast.error("An error occurred while processing your request.");
+      console.error("Checkout error:", err);
+    }
+  };
+
   return (
     <div className="lg:col-span-1">
       <Card className="sticky top-8">
@@ -72,7 +123,10 @@ export function EventBookingSidebar({
               </div>
             </div>
 
-            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-3">
+            <Button
+              className="w-full bg-blue-600 hover:bg-blue-700 text-lg py-3"
+              onClick={handleCheckout}
+            >
               Buy Tickets
             </Button>
           </div>

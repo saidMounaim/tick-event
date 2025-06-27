@@ -54,6 +54,8 @@ model User {
   account       Account[]
   session       Session[]
   events        Event[]
+  stripeCustomerId String?
+  orders        Order[]
 }
 
 model Verification {
@@ -80,6 +82,8 @@ model Event {
   isFeatured        Boolean  @default(false)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+
+  orders            Order[]
 }
 
 model Image {
@@ -87,4 +91,20 @@ model Image {
   url      String
   event    Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
   eventId  String
+}
+
+model Order {
+  id                 String   @id @default(cuid())
+  userId             String
+  eventId            String
+  quantity           Int
+  totalAmount        Decimal
+  paymentStatus      String
+  stripeSessionId    String? 
+  stripePaymentIntentId String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event              Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
 }

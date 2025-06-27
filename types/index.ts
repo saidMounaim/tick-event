@@ -9,9 +9,9 @@ export interface EventTypes {
   location: string | null;
   featuredImage: string | null;
   userId: string;
-  createdAt: Date;
-  updatedAt: Date;
-  isFeatured: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+  isFeatured?: boolean;
 }
 export interface AdditionalImage {
   id: string;
@@ -19,5 +19,5 @@ export interface AdditionalImage {
   eventId: string;
 }
 export interface EventWithImages extends EventTypes {
-  additionalImages: AdditionalImage[];
+  additionalImages: AdditionalImage[] | null;
 }
