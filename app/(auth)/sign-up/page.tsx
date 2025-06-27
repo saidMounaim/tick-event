@@ -6,11 +6,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function SignUpPage() {
+export default async function SignUpPage() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (session) redirect("/dashboard");
   return (
-    <main className="flex-1 flex items-center justify-center py-12">
+    <div className="flex-1 flex items-center justify-center py-12">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold">Sign Up</CardTitle>
@@ -28,6 +35,6 @@ export default function SignUpPage() {
           </div>
         </CardContent>
       </Card>
-    </main>
+    </div>
   );
 }

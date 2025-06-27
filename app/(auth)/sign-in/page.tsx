@@ -6,9 +6,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function SignInPage() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+  if (session) redirect("/dashboard");
   return (
     <div className="flex-1 flex items-center justify-center py-12">
       <Card className="w-full max-w-md">
