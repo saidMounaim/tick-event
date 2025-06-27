@@ -78,3 +78,19 @@ export async function getLatestEventsAction(size: number = 5) {
     return { success: false, message: "Failed to fetch events." };
   }
 }
+
+export async function getEventByIdAction(id: string) {
+  try {
+    const event = await prisma.event.findUnique({
+      where: { id },
+      include: {
+        additionalImages: true,
+      },
+    });
+
+    return event;
+  } catch (error) {
+    console.log(error);
+    return { success: false, message: "Failed to fetch event." };
+  }
+}

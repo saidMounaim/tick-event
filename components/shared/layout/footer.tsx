@@ -1,6 +1,11 @@
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 import Link from "next/link";
 
-export function Footer() {
+export async function Footer() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-4">
@@ -31,22 +36,26 @@ export function Footer() {
                   Events
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/signin"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Sign In
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/signup"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Sign Up
-                </Link>
-              </li>
+              {!session && (
+                <>
+                  <li>
+                    <Link
+                      href="/signin"
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      Sign In
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/signup"
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      Sign Up
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
 

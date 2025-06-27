@@ -15,3 +15,13 @@ export function getUserInitials(name: string = "") {
     return trimmedName.substring(0, 2);
   }
 }
+
+export function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}
