@@ -6,6 +6,16 @@ import { prisma } from "../prisma";
 import { auth } from "../auth";
 import { headers } from "next/headers";
 
+export async function getEventsAction() {
+  const events = await prisma.event.findMany({
+    orderBy: { date: "desc" },
+    include: {
+      additionalImages: true,
+    },
+  });
+  return events;
+}
+
 export async function createEventAction(
   formData: z.infer<typeof createEventSchema> & {
     featuredImageUrl?: string;
@@ -66,17 +76,12 @@ export async function createEventAction(
 }
 
 export async function getLatestEventsAction(size: number = 5) {
-  try {
-    const events = await prisma.event.findMany({
-      orderBy: { date: "desc" },
-      take: size,
-    });
+  const events = await prisma.event.findMany({
+    orderBy: { date: "desc" },
+    take: size,
+  });
 
-    return events;
-  } catch (error) {
-    console.log(error);
-    return { success: false, message: "Failed to fetch events." };
-  }
+  return events;
 }
 
 export async function getEventByIdAction(id: string) {

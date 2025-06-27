@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getLatestEventsAction } from "@/lib/actions/event";
 import { EventCard } from "../events/event-card";
 import { EventTypes } from "@/types";
 
 export async function LatestEvents() {
-  const events: any = await getLatestEventsAction(3);
+  const events: EventTypes[] = await getLatestEventsAction(3);
   return (
     <section className="py-20">
       <div className="container mx-auto px-4">
