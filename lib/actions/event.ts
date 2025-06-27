@@ -6,8 +6,17 @@ import { prisma } from "../prisma";
 import { auth } from "../auth";
 import { headers } from "next/headers";
 
-export async function getEventsAction() {
+export async function getEventsAction(query?: string) {
+  const where = query
+    ? {
+        OR: [
+          { title: { contains: query, mode: "insensitive" as const } },
+          { description: { contains: query, mode: "insensitive" as const } },
+        ],
+      }
+    : {};
   const events = await prisma.event.findMany({
+    where,
     orderBy: { date: "desc" },
     include: {
       additionalImages: true,
