@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎟️ TickEvent
 
-## Getting Started
+**TickEvent** is a clean, minimal event-sharing and ticketing web app built with **Next.js**, **Prisma**, **BetterAuth**, and **ShadCN/UI**. Users can create events, upload images, sell tickets via Stripe, and track orders—all.
 
-First, run the development server:
+## 🚀 Live Demo
+
+🔗 [https://tick-event.vercel.app](https://tick-event.vercel.app)
+
+---
+
+## ✨ Features
+
+- 🔐 Sign up / Sign in with BetterAuth
+- 🎉 Create events with title, image, price, and ticket count
+- 📸 Upload images using ImageKit
+- 💳 Buy tickets with secure Stripe Checkout
+- 📊 View your ticket orders in your personal dashboard
+- 💅 Fully responsive, clean design using ShadCN/UI and Tailwind CSS
+
+---
+
+## 📦 Tech Stack
+
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [ShadCN/UI](https://ui.shadcn.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Prisma ORM](https://www.prisma.io/)
+- [BetterAuth](https://www.better-auth.com/)
+- [Stripe](https://stripe.com/) — payments
+- [ImageKit](https://imagekit.io/) — image uploads
+
+---
+
+## 🛠 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/saidMounaim/tick-event.git
+cd tick-event
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file in the root:
+
+```env
+# Database
+DATABASE_URL="postgresql://..."
+
+# BetterAuth
+BETTER_AUTH_BASE_URL="https://tick-event.vercel.app"
+BETTER_AUTH_SECRET="your_betterauth_secret"
+
+# Stripe
+STRIPE_SECRET_KEY="sk_test_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_test_..."
+
+# ImageKit
+IMAGEKIT_PUBLIC_KEY="your_public_key"
+IMAGEKIT_PRIVATE_KEY="your_private_key"
+IMAGEKIT_URL_ENDPOINT="https://ik.imagekit.io/your_id"
+
+# App
+NEXT_PUBLIC_APP_URL="https://tick-event.vercel.app"
+```
+
+### 4. Start the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 💼 Contribution
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All contributions are welcome!  
+Fork the repo, create a new branch, and submit a pull request.

@@ -67,6 +67,14 @@ export function EventBookingSidebar({
     <div className="lg:col-span-1">
       <Card className="sticky top-8">
         <CardContent className="p-6">
+          <div className="mb-4 p-3 rounded bg-yellow-50 border border-yellow-300 text-yellow-800 text-sm text-center">
+            <strong>Test Mode:</strong> <br />
+            <span>Do not use your real card. This is a demo environment.</span>
+            <br />
+            Use card <span className="font-mono">4242 4242 4242 4242</span>,
+            date <span className="font-mono">12/34</span>, CVC{" "}
+            <span className="font-mono">123</span> to test payments.
+          </div>
           <div className="text-center mb-6">
             <div className="text-3xl font-bold text-blue-600 mb-2">
               ${price.toFixed(2)}
