@@ -72,11 +72,11 @@ const UserDropdown = () => {
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link
-            href="/my-events"
+            href="/my-orders"
             className="flex items-center text-blue-600 hover:text-blue-600 hover:bg-transparent"
           >
             <Info className="mr-2 h-4 w-4" />
-            My Events
+            My Orders
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

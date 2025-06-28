@@ -45,6 +45,14 @@ export async function POST(req: NextRequest) {
           stripePaymentIntentId: session.payment_intent as string,
         },
       });
+      await prisma.event.update({
+        where: { id: eventId },
+        data: {
+          tickets: {
+            decrement: parseInt(quantity),
+          },
+        },
+      });
     } catch (err) {
       console.error("Order creation failed", err);
     }

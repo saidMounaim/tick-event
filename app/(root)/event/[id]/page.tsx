@@ -7,6 +7,21 @@ import { getEventByIdAction } from "@/lib/actions/event";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const event = await getEventByIdAction(params.id);
+  if (!event) return {};
+
+  return {
+    title: event.title,
+    description: event.description?.slice(0, 150) || "Event details",
+  };
+}
 
 export default async function EventDetailsPage({
   params,

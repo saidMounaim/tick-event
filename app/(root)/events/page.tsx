@@ -2,6 +2,13 @@ import { EventCard } from "@/components/shared/events/event-card";
 import { EventsSearch } from "@/components/shared/events/events-search";
 import { getEventsAction } from "@/lib/actions/event";
 import { EventWithImages } from "@/types";
+import { Metadata } from "next";
+
+export const generateMetadata = async (): Promise<Metadata> => ({
+  title: "All Events | TickEvent",
+  description:
+    "Browse all upcoming events, search by keyword, and discover your next experience on TickEvent.",
+});
 
 interface EventsPageProps {
   searchParams: Promise<{ [key: string]: string | undefined }>;

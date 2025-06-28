@@ -43,3 +43,15 @@ export async function getTotalRevenueByUser(userId: string) {
   );
   return totalRevenue;
 }
+
+export async function getOrderByUserIdAction(userId: string) {
+  return prisma.order.findMany({
+    where: { userId },
+    include: {
+      event: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}
