@@ -92,7 +92,20 @@ export async function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400">
-            © 2024 TickEvent. All rights reserved.
+            © {new Date().getFullYear()} TickEvent. Built with{" "}
+            <span className="text-red-500" role="img" aria-label="love">
+              ❤️
+            </span>{" "}
+            by{" "}
+            <a
+              href="https://mounaim.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:underline"
+            >
+              Said Mounaim
+            </a>
+            .
           </p>
         </div>
       </div>
