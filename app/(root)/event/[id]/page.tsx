@@ -37,13 +37,15 @@ export default async function EventDetailsPage({
   const event = await getEventByIdAction(id);
   if (!event) notFound();
 
+  const defaultEventImage = "https://ik.imagekit.io/dr6ajzqv4/default-event.png";
+
   return (
     <div className="flex-1 py-8">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
             <EventImages
-              featuredImage={event.featuredImage as string}
+              featuredImage={event.featuredImage ? (event.featuredImage as string) : defaultEventImage}
               additionalImages={event.additionalImages as any[]}
               title={event.title}
             />

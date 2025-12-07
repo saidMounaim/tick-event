@@ -12,11 +12,12 @@ interface EventCardProps {
 }
 
 export function EventCard({ event, showBookButton = true }: EventCardProps) {
+  const defaultEventImage = "https://ik.imagekit.io/dr6ajzqv4/default-event.png";
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow p-0">
       <div className="aspect-video relative overflow-hidden">
         <Image
-          src={event.featuredImage as string}
+          src={event.featuredImage ? (event.featuredImage as string) : defaultEventImage}
           alt={event.title}
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
           fill
